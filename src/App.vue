@@ -1,19 +1,25 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
+  <div id="app" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
     <router-view/>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    ...mapGetters({
+      loading: 'loading'
+    })
+  }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
