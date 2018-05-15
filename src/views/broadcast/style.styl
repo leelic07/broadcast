@@ -1,3 +1,87 @@
-.broadcast-container {
-    
-}
+/*语音播报列表*/
+.broadcast-container 
+    >.el-col
+        &:first-child
+            .el-button
+                float right
+                padding 0
+                margin-right 2%
+                margin-bottom 15px
+    .el-card
+        width 80%
+        margin-left 10%
+        margin-bottom 20px
+        .el-card__header
+            float left
+            width 100%
+            .el-col
+                .el-tag
+                    float left
+                    h4
+                        text-align left
+                .el-button
+                    float right
+        .el-card__body
+            float left
+            &:hover
+                cursor pointer
+            .el-col
+                overflow hidden
+                &:first-child
+                    .broadcast-content
+                        word-break keep-all
+                        white-space nowrap
+                        overflow hidden
+                        text-overflow ellipsis
+                &:nth-child(2)
+                    margin-top 20px
+                    .el-button
+                        i
+                            font-size 20px
+                    audio
+                        width 80%
+                        float left
+                
+
+/*语音播报详情*/
+.broadcast-edit-container
+    .el-card
+        .el-card__body
+            >.el-col
+                &:first-child
+                    .el-button
+                        float left
+                        i
+                            font-size 16px
+                            font-weight bold
+            .el-form
+                padding-left 15%
+                padding-top 15px
+                padding-right 10%
+                .el-form-item__content
+                    .el-tag
+                        float left
+                    h3
+                        text-align left
+                        margin-top 65px
+                    p
+                        margin-top 50px
+                        text-align left
+                    .el-textarea
+                        margin-top 24px
+                        .el-textarea__inner
+                            line-height 35px
+                    .el-button
+                        float right
+                    &:last-child
+                        .el-col
+                            margin-top 20px
+                            .el-button
+                                float left
+                                position relative
+                                z-index 1
+                            .el-progress
+                                margin-top 10px
+                            audio
+                                width 100%
+                        

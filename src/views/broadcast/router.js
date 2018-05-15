@@ -1,5 +1,9 @@
 export default [{
   path: '/broadcast',
-  name: 'broadcast',
+  name: 'Broadcast',
   component: () => import('./index')
+}, {
+  path: '/broadcast/edit/:id',
+  name: 'BroadcastEdit',
+  component: () => import('./views/edit')
 }]

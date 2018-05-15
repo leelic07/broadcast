@@ -1,6 +1,8 @@
 <template>
   <div id="app" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
-    <router-view/>
+    <transition name="fade" mode="out-in">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
