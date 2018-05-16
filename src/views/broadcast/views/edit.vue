@@ -23,7 +23,7 @@
                 <i class="iconfont icon-bofangzanting"></i>
               </el-button>
               <el-progress :percentage="50"></el-progress> -->
-              <audio src="./static/zgz.mp3" controls>
+              <audio :src="broadForEdit.file" controls>
                 您的浏览器不支持播放音频文件
               </audio>
             </el-col>
@@ -44,7 +44,7 @@ export default {
         title: '语音播报管理系统',
         content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
         createdAt: '2018-5-15 09:41',
-        file: 'broadcast.pcm'
+        file: './static/zgz.mp3'
       },
       isModification: false
     }

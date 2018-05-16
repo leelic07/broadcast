@@ -24,9 +24,12 @@
         <el-col :span="20">
           <p class="broadcast-content">{{broad.content}}</p>
         </el-col>
+        <el-col :span="4">
+          <p>{{broad.createdAt}}</p>
+        </el-col>
         <el-col>
           <!-- <el-button type="primary" circle> -->
-            <audio src="./static/zgz.mp3" controls>
+            <audio :src="broad.file" controls>
               您的浏览器不支持播放音频文件
             </audio>
             <!-- <i class="el-icon-caret-right"></i>
@@ -47,37 +50,37 @@ export default {
         title: '语音播报管理系统',
         content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
         createdAt: '2018-5-15 09:41',
-        file: 'broadcast.pcm'
+        file: './static/zgz.mp3'
       }, {
         id: 2,
         title: '语音播报管理系统',
         content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
         createdAt: '2018-5-15 09:41',
-        file: 'broadcast.pcm'
+        file: './static/zgz.mp3'
       }, {
         id: 3,
         title: '语音播报管理系统',
         content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
         createdAt: '2018-5-15 09:41',
-        file: 'broadcast.pcm'
+        file: './static/zgz.mp3'
       }, {
         id: 4,
         title: '语音播报管理系统',
         content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
         createdAt: '2018-5-15 09:41',
-        file: 'broadcast.pcm'
+        file: './static/zgz.mp3'
       }, {
         id: 5,
         title: '语音播报管理系统',
         content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
         createdAt: '2018-5-15 09:41',
-        file: 'broadcast.pcm'
+        file: './static/zgz.mp3'
       }, {
         id: 6,
         title: '语音播报管理系统',
         content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
         createdAt: '2018-5-15 09:41',
-        file: 'broadcast.pcm'
+        file: './static/zgz.mp3'
       }]
     }
   },
