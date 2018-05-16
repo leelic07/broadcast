@@ -46,13 +46,6 @@ export default {
       }
     }
   },
-  watch: {
-    token () {
-      this.$router.push({
-        path: '/broadcast'
-      })
-    }
-  },
   computed: {
     ...mapGetters({
       token: 'token'

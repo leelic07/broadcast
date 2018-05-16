@@ -5,7 +5,7 @@ export default {
   // method: 'get',
   // 基础url前缀
   // basd//pandax.mofasion.com',
-  baseURL: 'http://10.93.1.100:8080',
+  // baseURL: 'http://10.93.1.100:8080',
   // 请求发送之前对出参进行处理
   // transformRequest: [data => data],
   // 请求发送之后对入参进行处理
@@ -14,7 +14,7 @@ export default {
   headers: {
     //  'X-Requested-With': 'XMLHttpRequest',
     // 'Content-Type': 'application/x-www-form-urlencoded'
-    // 'Content-Type': 'application/json'
+    'Content-Type': 'application/json'
   },
   // post 请求参数
   // data: {},

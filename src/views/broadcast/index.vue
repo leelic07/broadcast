@@ -35,50 +35,65 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
-      title: 'BroadCast',
-      broadcastList: [{
-        id: 1,
-        title: '语音播报管理系统',
-        content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-        createdAt: '2018-5-15 09:41',
-        file: './static/zgz.mp3'
-      }, {
-        id: 2,
-        title: '语音播报管理系统',
-        content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-        createdAt: '2018-5-15 09:41',
-        file: './static/zgz.mp3'
-      }, {
-        id: 3,
-        title: '语音播报管理系统',
-        content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-        createdAt: '2018-5-15 09:41',
-        file: './static/zgz.mp3'
-      }, {
-        id: 4,
-        title: '语音播报管理系统',
-        content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-        createdAt: '2018-5-15 09:41',
-        file: './static/zgz.mp3'
-      }, {
-        id: 5,
-        title: '语音播报管理系统',
-        content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-        createdAt: '2018-5-15 09:41',
-        file: './static/zgz.mp3'
-      }, {
-        id: 6,
-        title: '语音播报管理系统',
-        content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-        createdAt: '2018-5-15 09:41',
-        file: './static/zgz.mp3'
-      }]
+      title: 'BroadCast'
+      // broadcastList: [{
+      //   id: 1,
+      //   title: '语音播报管理系统',
+      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
+      //   createdAt: '2018-5-15 09:41',
+      //   file: './static/zgz.mp3'
+      // }, {
+      //   id: 2,
+      //   title: '语音播报管理系统',
+      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
+      //   createdAt: '2018-5-15 09:41',
+      //   file: './static/zgz.mp3'
+      // }, {
+      //   id: 3,
+      //   title: '语音播报管理系统',
+      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
+      //   createdAt: '2018-5-15 09:41',
+      //   file: './static/zgz.mp3'
+      // }, {
+      //   id: 4,
+      //   title: '语音播报管理系统',
+      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
+      //   createdAt: '2018-5-15 09:41',
+      //   file: './static/zgz.mp3'
+      // }, {
+      //   id: 5,
+      //   title: '语音播报管理系统',
+      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
+      //   createdAt: '2018-5-15 09:41',
+      //   file: './static/zgz.mp3'
+      // }, {
+      //   id: 6,
+      //   title: '语音播报管理系统',
+      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
+      //   createdAt: '2018-5-15 09:41',
+      //   file: './static/zgz.mp3'
+      // }]
     }
   },
+  watch: {
+    broadcast (newValue) {
+      console.log(newValue)
+    }
+  },
+  computed: {
+    ...mapGetters({
+      broadcastList: 'broadcastList'
+    })
+  },
   methods: {
+    ...mapActions({
+      getRecordings: 'getRecordings'
+    }),
     editBroadcast (id) {
       this.$router.replace({
         path: `/broadcast/edit/${id}`
@@ -95,6 +110,9 @@ export default {
         })
       }).catch(err => console.log(err))
     }
+  },
+  mounted () {
+    this.getRecordings()
   }
 }
 </script>

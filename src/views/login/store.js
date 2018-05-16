@@ -1,5 +1,5 @@
 import { login } from './service'
-// import router from '@/router'
+import router from '@/router'
 import { Message } from 'element-ui'
 
 export default {
@@ -8,21 +8,7 @@ export default {
   },
   actions: {
     login ({ commit }, user) {
-      // if (user.username === 'admin' && user.password === '3m4c3n9J') {
-      //   Message({
-      //     showClose: true,
-      //     type: 'success',
-      //     message: '登录成功'
-      //   })
-      //   router.push('/broadcast')
-      // } else {
-      //   Message({
-      //     showClose: true,
-      //     type: 'error',
-      //     message: '用户名或者密码不正确'
-      //   })
-      // }
-      login(user).then(res => res.code === 200 && commit('login', user)).catch(err => console.log(err))
+      login(user).then(res => commit('login', res)).catch(err => console.log(err))
     }
   },
   mutations: {
@@ -37,10 +23,13 @@ export default {
           message: '登录成功',
           showClose: true
         })
+        router.push({
+          path: '/broadcast'
+        })
       } else {
         Message({
           type: 'error',
-          message: '登录失败',
+          message: '用户名或者密码不正确',
           showClose: true
         })
       }
