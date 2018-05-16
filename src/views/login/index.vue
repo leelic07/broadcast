@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
@@ -45,8 +46,20 @@ export default {
       }
     }
   },
+  watch: {
+    token () {
+      this.$router.push({
+        path: '/broadcast'
+      })
+    }
+  },
+  computed: {
+    ...mapGetters({
+      token: 'token'
+    })
+  },
   methods: {
-    ...mapMutations({
+    ...mapActions({
       login: 'login'
     }),
     submitForm (formName) {

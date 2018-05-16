@@ -12,7 +12,7 @@
           <el-tag>
             <h3>
               <i class="el-icon-service"></i>
-              {{broad.title}}
+              {{broad.createdAt}}
             </h3>
           </el-tag>
         </el-col>
@@ -24,16 +24,10 @@
         <el-col :span="20">
           <p class="broadcast-content">{{broad.content}}</p>
         </el-col>
-        <el-col :span="4">
-          <p>{{broad.createdAt}}</p>
-        </el-col>
         <el-col>
-          <!-- <el-button type="primary" circle> -->
             <audio :src="broad.file" controls>
               您的浏览器不支持播放音频文件
             </audio>
-            <!-- <i class="el-icon-caret-right"></i>
-          </el-button> -->
         </el-col>
       </el-col>
     </el-card>

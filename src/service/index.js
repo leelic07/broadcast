@@ -10,7 +10,7 @@ const getUrl = (url) => `${agency}${url}`
 // http request 拦截器
 instance.interceptors.request.use(
   config => {
-    // sessionStorage['token'] && (config.headers.common['Authorization'] = sessionStorage['token'])// 每次发送请求是给请求头加上token
+    sessionStorage['token'] && (config.headers.common['Authorization'] = sessionStorage['token'])// 每次发送请求是给请求头加上token
     // else if (config.url.substring(0, config.url.lastIndexOf('?')) !== `${agency}/authentication`) {//没有token提示‘先登录’再跳转到登录页面
     //   Message({type: 'warning', message: '当前用户无权限，请先登录！'})
     //   router.push({
