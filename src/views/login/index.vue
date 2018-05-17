@@ -3,6 +3,16 @@
         <el-col class="inner-bg">
             <el-col class="container">
                 <el-col class="row">
+                    <el-col :span="6" class="set-host">
+                      <label>
+                        <el-input v-model="host" placeholder="请填写访问的主机名，端口" size="small">
+                          <template slot="prepend">
+                            http://
+                          </template>
+                          <el-button slot="append" type="primary" @click="reload">刷新</el-button>
+                        </el-input>
+                      </label>
+                    </el-col>
                     <el-col :span="12" :offset="6" class="form-box">
                         <el-col class="form-top">
                             <el-col class="form-top-left">
@@ -32,6 +42,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import config from '../../service/config/base'
 
 export default {
   data () {
@@ -43,7 +54,14 @@ export default {
       rules: {
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }]
-      }
+      },
+      host: ''
+    }
+  },
+  watch: {
+    host (newValue) {
+      localStorage['host'] = newValue
+      config.baseURL = newValue
     }
   },
   computed: {
@@ -59,6 +77,9 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) this.login(this.loginForm)
       })
+    },
+    reload () {
+      window.location.reload()
     }
   },
   mounted () {
@@ -71,4 +92,12 @@ export default {
 
 <style type="text/stylus" lang="stylus" scoped>
 @import '../../assets/css/style.css';
+.top-content
+  .set-host
+    position absolute
+    right -20%
+    transition all linear .5s
+    &:hover
+      right 0
+      cursor pointer
 </style>

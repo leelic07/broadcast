@@ -20,7 +20,6 @@
             </el-tag>
             <el-col>
               <audio :src="$_baseURL + broadForEdit.Filename" controls>
-                <!-- <source type="audio/wav"> -->
                 您的浏览器不支持播放音频文件
               </audio>
             </el-col>

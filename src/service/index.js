@@ -2,7 +2,7 @@ import base from './config/base'
 import axios from 'axios'
 import store from '@/store'
 import qs from 'qs'
-const instance = axios.create(base)
+export let instance = axios.create(base)
 // 代理服务器
 export const agency = '/api/v1'
 // 获取异步请求的url
