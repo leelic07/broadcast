@@ -1,22 +1,84 @@
-import { getRecordings } from './service'
+import {
+  getRecordings,
+  getRecordingById,
+  updateRecording,
+  deleteBroadcast
+} from './service'
+import { Message } from 'element-ui'
+import router from '@/router'
 
 export default {
   state: {
-    broadcastList: []
+    broadcastList: [],
+    broadForEdit: {},
+    updateRecordingResult: {}
   },
   actions: {
     getRecordings ({ commit }) {
-      getRecordings().then(res => commit('getRecordings', res)).catch(err => console.log(err))
+      getRecordings().then(res => res.code === 200 && commit('getRecordings', res)).catch(err => console.log(err))
+    },
+    getRecordingById ({ commit }, id) {
+      getRecordingById(id).then(res => res.code === 200 && commit('getRecordingById', res)).catch(err => console.log(err))
+    },
+    updateRecording ({ commit }, recording) {
+      const id = recording.Id
+      const content = recording.Content
+      updateRecording(id, { content }).then(res => commit('updateRecording', res)).catch(err => console.log(err))
+    },
+    deleteBroadcast ({ commit }, id) {
+      deleteBroadcast(id).then(res => commit('deleteBroadcast', res)).catch(err => console.log(err))
     }
   },
   mutations: {
-    getRecordings (state, recordingResult) {
-      const recordings = recordingResult.recordings
+    getRecordings (state, res) {
+      const recordings = res.recordings
       state.broadcastList = recordings
-      debugger
+    },
+    getRecordingById (state, res) {
+      const recording = res.recording
+      state.broadForEdit = recording
+    },
+    updateRecording (state, res) {
+      const code = res.code
+      code === 200 ? Message({
+        type: 'success',
+        message: '修改语音内容成功',
+        showClose: true
+      }) : Message({
+        type: 'error',
+        message: '修改语音内容失败',
+        showClose: true
+      })
+
+      state.updateRecordingResult = res
+    },
+    logout (state) {
+      router.replace({
+        path: '/login'
+      })
+      Message({
+        type: 'success',
+        message: '退出登录成功',
+        showClose: true
+      })
+    },
+    deleteBroadcast (state, res) {
+      const code = res.code
+      code === 200 ? Message({
+        type: 'success',
+        message: '删除语音成功',
+        showClose: true
+      }) : Message({
+        type: 'error',
+        message: '删除语音失败',
+        showClose: true
+      })
+      state.deleteRecordingResult = res
     }
   },
   getters: {
-    broadcastList: state => state.broadcastList
+    broadcastList: state => state.broadcastList,
+    broadForEdit: state => state.broadForEdit,
+    updateRecordingResult: state => state.updateRecordingResult
   }
 }

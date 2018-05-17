@@ -1,7 +1,7 @@
 <template>
-  <el-row class="container-box broadcast-container">
+  <el-row class="broadcast-container">
     <el-col>
-      <el-button type="text" @click="logout">
+      <el-button type="text" @click="logoutConfirm">
         退出登录
         <i class="iconfont icon-tuichu"></i>
       </el-button>
@@ -12,22 +12,26 @@
           <el-tag>
             <h3>
               <i class="el-icon-service"></i>
-              {{broad.createdAt}}
+              {{broad.Timestamp | Date}}
             </h3>
           </el-tag>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" plain round size="small" icon="el-icon-edit" @click="editBroadcast(broad.id)">编辑语音播报</el-button>
+          <el-button type="primary" plain size="small" icon="el-icon-edit" @click="editBroadcast(broad.Id)">编辑语音</el-button>
         </el-col>
       </el-col>
       <el-col>
         <el-col :span="20">
-          <p class="broadcast-content">{{broad.content}}</p>
+          <p class="broadcast-content">{{broad.Content || '暂无内容'}}</p>
         </el-col>
-        <el-col>
-            <audio :src="broad.file" controls>
+        <el-col :span="20">
+            <video controls width="100%" height="30px">
+              <source :src="$_baseURL + broad.Filename" type="audio/wav">
               您的浏览器不支持播放音频文件
-            </audio>
+            </video>
+        </el-col>
+        <el-col :span="4">
+          <el-button type="text" icon="el-icon-delete" size="mini" @click="deleteBroadcastConfirm(broad.Id)">删除语音</el-button>
         </el-col>
       </el-col>
     </el-card>
@@ -35,79 +39,50 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
       title: 'BroadCast'
-      // broadcastList: [{
-      //   id: 1,
-      //   title: '语音播报管理系统',
-      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-      //   createdAt: '2018-5-15 09:41',
-      //   file: './static/zgz.mp3'
-      // }, {
-      //   id: 2,
-      //   title: '语音播报管理系统',
-      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-      //   createdAt: '2018-5-15 09:41',
-      //   file: './static/zgz.mp3'
-      // }, {
-      //   id: 3,
-      //   title: '语音播报管理系统',
-      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-      //   createdAt: '2018-5-15 09:41',
-      //   file: './static/zgz.mp3'
-      // }, {
-      //   id: 4,
-      //   title: '语音播报管理系统',
-      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-      //   createdAt: '2018-5-15 09:41',
-      //   file: './static/zgz.mp3'
-      // }, {
-      //   id: 5,
-      //   title: '语音播报管理系统',
-      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-      //   createdAt: '2018-5-15 09:41',
-      //   file: './static/zgz.mp3'
-      // }, {
-      //   id: 6,
-      //   title: '语音播报管理系统',
-      //   content: '语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统,语音播报管理系统',
-      //   createdAt: '2018-5-15 09:41',
-      //   file: './static/zgz.mp3'
-      // }]
     }
   },
   watch: {
-    broadcast (newValue) {
-      console.log(newValue)
+    deleteRecordingResult () {
+      this.getRecordings()
     }
   },
   computed: {
     ...mapGetters({
-      broadcastList: 'broadcastList'
+      broadcastList: 'broadcastList',
+      deleteRecordingResult: 'deleteRecordingResult'
     })
   },
   methods: {
     ...mapActions({
-      getRecordings: 'getRecordings'
+      getRecordings: 'getRecordings',
+      deleteBroadcast: 'deleteBroadcast'
     }),
-    editBroadcast (id) {
-      this.$router.replace({
-        path: `/broadcast/edit/${id}`
+    ...mapMutations({
+      logout: 'logout'
+    }),
+    editBroadcast (Id) {
+      this.$router.push({
+        path: `/broadcast/edit/${Id}`
       })
     },
-    logout () {
+    logoutConfirm () {
       this.$confirm('确定退出登录？', '提示', {
-        confrimButtonText: '确定',
-        confirmCancelText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$router.replace({
-          path: '/login'
-        })
+        this.logout()
+      }).catch(err => console.log(err))
+    },
+    deleteBroadcastConfirm (id) {
+      this.$confirm('确定删除该语音？', '提示', {
+        type: 'warning'
+      }).then(() => {
+        this.deleteBroadcast(id)
       }).catch(err => console.log(err))
     }
   },

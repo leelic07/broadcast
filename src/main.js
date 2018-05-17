@@ -7,10 +7,13 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/icon/iconfont.css'
-import './style/index.styl'
+import './assets/style/index.styl'
+import filters from '@/filter'
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
+Vue.prototype.$_baseURL = 'http://10.93.1.100:8080'
 
 /* eslint-disable no-new */
 new Vue({

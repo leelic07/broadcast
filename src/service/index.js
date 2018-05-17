@@ -4,20 +4,13 @@ import store from '@/store'
 import qs from 'qs'
 const instance = axios.create(base)
 // 代理服务器
-export const agency = ''
+export const agency = '/api/v1'
 // 获取异步请求的url
 const getUrl = (url) => `${agency}${url}`
 // http request 拦截器
 instance.interceptors.request.use(
   config => {
     sessionStorage['token'] && (config.headers.common['Authorization'] = sessionStorage['token'])// 每次发送请求是给请求头加上token
-    // else if (config.url.substring(0, config.url.lastIndexOf('?')) !== `${agency}/authentication`) {//没有token提示‘先登录’再跳转到登录页面
-    //   Message({type: 'warning', message: '当前用户无权限，请先登录！'})
-    //   router.push({
-    //     path: '/login'
-    //   })
-    //   return
-    // }
     // 加载loading遮罩层
     store.commit('showLoading')
     return config
@@ -92,7 +85,7 @@ export const patchFile = (url, data = {}) => {
  * @returns {Promise}
  */
 export const patch = (url, data = {}, config = {}) =>
-  instance.patch(getUrl(url), qs.stringify(data), config).then(res => res.data).catch(err => err)
+  instance.patch(getUrl(url), data, config).then(res => res.data).catch(err => err)
 // instance.patch(url, qs.stringify(data), config).then(res => res.data).catch(err => err)
 /**
  * 封装put请求
@@ -109,7 +102,7 @@ export const put = (url, data = {}) =>
  * @returns {Promise}
  */
 export const remove = (url, data = {}) =>
-  instance.delete(getUrl(url), qs.stringify(data)).then(res => res.data).catch(err => err)
+  instance.delete(getUrl(url), data).then(res => res.data).catch(err => err)
 /**
  * 封装all请求
  * @param urls

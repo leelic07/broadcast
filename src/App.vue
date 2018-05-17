@@ -1,8 +1,10 @@
 <template>
-  <div id="app" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
-    <transition name="fade" mode="out-in">
-      <router-view/>
-    </transition>
+  <div id="app">
+    <el-row class="container-box" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
+      <transition name="fade" mode="out-in">
+        <router-view/>
+      </transition>
+    </el-row>
   </div>
 </template>
 

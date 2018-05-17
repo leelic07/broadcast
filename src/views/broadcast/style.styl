@@ -23,17 +23,15 @@
                     float right
         .el-card__body
             float left
-            // &:hover
-            //     cursor pointer
+            width 100%
             .el-col
-                overflow hidden
                 &:first-child
                     .broadcast-content
                         word-break keep-all
                         white-space nowrap
                         overflow hidden
                         text-overflow ellipsis
-                &:last-child
+                &:nth-child(2)
                     margin-top 20px
                     .el-button
                         i
@@ -41,6 +39,12 @@
                     audio
                         width 80%
                         float left
+                    video
+                        float left
+                &:last-child
+                    .el-button
+                        margin-top 19px
+                        font-size 14px
                 
 
 /*语音播报详情*/
@@ -71,9 +75,12 @@
                         margin-top 24px
                         .el-textarea__inner
                             line-height 35px
-                    .el-button
-                        float right
                     &:last-child
+                        >.el-button
+                            float right
+                            font-size 14px
+                            margin-left 2%
+                            margin-top 15px
                         .el-col
                             margin-top 20px
                             .el-button
