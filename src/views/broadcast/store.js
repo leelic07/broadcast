@@ -11,7 +11,8 @@ export default {
   state: {
     broadcastList: [],
     broadForEdit: {},
-    updateRecordingResult: {}
+    updateRecordingResult: {},
+    deleteRecordingResult: {}
   },
   actions: {
     getRecordings ({ commit }) {
@@ -79,6 +80,7 @@ export default {
   getters: {
     broadcastList: state => state.broadcastList,
     broadForEdit: state => state.broadForEdit,
-    updateRecordingResult: state => state.updateRecordingResult
+    updateRecordingResult: state => state.updateRecordingResult,
+    deleteRecordingResult: state => state.deleteRecordingResult
   }
 }

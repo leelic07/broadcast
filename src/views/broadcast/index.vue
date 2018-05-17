@@ -25,10 +25,9 @@
           <p class="broadcast-content">{{broad.Content || '暂无内容'}}</p>
         </el-col>
         <el-col :span="20">
-            <video controls width="100%" height="30px">
-              <source :src="$_baseURL + broad.Filename" type="audio/wav">
+            <audio :src="$_baseURL + broad.Filename" controls>
               您的浏览器不支持播放音频文件
-            </video>
+            </audio>
         </el-col>
         <el-col :span="4">
           <el-button type="text" icon="el-icon-delete" size="mini" @click="deleteBroadcastConfirm(broad.Id)">删除语音</el-button>

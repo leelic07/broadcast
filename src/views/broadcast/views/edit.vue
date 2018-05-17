@@ -19,9 +19,10 @@
               播放
             </el-tag>
             <el-col>
-              <video :src="$_baseURL + broadForEdit.Filename" controls width="100%" height="35px">
+              <audio :src="$_baseURL + broadForEdit.Filename" controls>
+                <!-- <source type="audio/wav"> -->
                 您的浏览器不支持播放音频文件
-              </video>
+              </audio>
             </el-col>
           </el-form-item>
           <el-form-item>
