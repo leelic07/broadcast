@@ -26,7 +26,7 @@ export default {
         router.push({
           path: '/broadcast'
         })
-      } else {
+      } else if (code === 404) {
         Message({
           type: 'error',
           message: '用户名或者密码不正确',

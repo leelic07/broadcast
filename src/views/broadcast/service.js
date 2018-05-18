@@ -1,6 +1,6 @@
 import { get, patch, remove } from '@/service'
 
-export const getRecordings = () => get('/recordings').then(res => res).catch(err => err)
+export const getRecordings = pagination => get('/recordings', pagination).then(res => res).catch(err => err)
 
 export const getRecordingById = id => get(`/recordings/${id}`).then(res => res).catch(err => err)
 

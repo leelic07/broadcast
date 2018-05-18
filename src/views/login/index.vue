@@ -16,7 +16,7 @@
                     <el-col :span="12" :offset="6" class="form-box">
                         <el-col class="form-top">
                             <el-col class="form-top-left">
-                                <h2>语音播报</h2>
+                                <h2>国科随意记</h2>
                                 <p>请输入您的用户名和密码:</p>
                             </el-col>
                         </el-col>
@@ -58,12 +58,6 @@ export default {
       host: ''
     }
   },
-  watch: {
-    host (newValue) {
-      localStorage['host'] = newValue
-      config.baseURL = newValue
-    }
-  },
   computed: {
     ...mapGetters({
       token: 'token'
@@ -79,13 +73,17 @@ export default {
       })
     },
     reload () {
-      window.location.reload()
+      this.$confirm('应用将会重启，确定该操作？', '提示', {
+        type: 'warning'
+      }).then(() => {
+        localStorage['host'] = this.host
+        config.baseURL = this.host
+        window.location.reload()
+      }).catch(err => console.log(err))
     }
   },
   mounted () {
-    if (localStorage.getItem('user')) {
-      this.$router.replace('/dashboard')
-    }
+    this.host = localStorage['host']
   }
 }
 </script>

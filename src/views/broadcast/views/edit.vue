@@ -11,7 +11,7 @@
               <i class="el-icon-date"></i>
               时间
             </el-tag>
-            <h3>{{broadForEdit.Timestamp | Date}}</h3>
+            <h3>{{broadForEdit.timestamp | Date}}</h3>
           </el-form-item>
           <el-form-item>
             <el-tag>
@@ -19,7 +19,7 @@
               播放
             </el-tag>
             <el-col>
-              <audio :src="$_baseURL + broadForEdit.Filename" controls>
+              <audio :src="$_baseURL + broadForEdit.filename" controls>
                 您的浏览器不支持播放音频文件
               </audio>
             </el-col>
@@ -29,8 +29,8 @@
               <i class="el-icon-document"></i>
               内容
             </el-tag>
-            <p v-if="!isModification">{{broadForEdit.Content || '暂无内容'}}</p>
-            <el-input v-if="isModification" type="textarea" v-model="broadForEdit.Content" size="meduim" :autosize="{minRows: 4,maxRows: 35}" placeholder="请输入内容"></el-input>
+            <p v-if="!isModification">{{broadForEdit.content || '暂无内容'}}</p>
+            <el-input v-if="isModification" type="textarea" v-model="broadForEdit.content" size="meduim" :autosize="{minRows: 4,maxRows: 35}" placeholder="请输入内容"></el-input>
             <el-button type="warning" plain size="mini" v-if="isModification" icon="el-icon-refresh" @click="cancel">取消</el-button>
             <el-button size="mini" type="primary" plain icon="el-icon-edit" @click="modify">{{isModification? '修改': '编辑'}}</el-button>
           </el-form-item>

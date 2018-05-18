@@ -15,15 +15,15 @@ export default {
     deleteRecordingResult: {}
   },
   actions: {
-    getRecordings ({ commit }) {
-      getRecordings().then(res => res.code === 200 && commit('getRecordings', res)).catch(err => console.log(err))
+    getRecordings ({ commit }, pagination) {
+      getRecordings(pagination).then(res => res.code === 200 && commit('getRecordings', res)).catch(err => console.log(err))
     },
     getRecordingById ({ commit }, id) {
       getRecordingById(id).then(res => res.code === 200 && commit('getRecordingById', res)).catch(err => console.log(err))
     },
     updateRecording ({ commit }, recording) {
-      const id = recording.Id
-      const content = recording.Content
+      const id = recording.id
+      const content = recording.content
       updateRecording(id, { content }).then(res => commit('updateRecording', res)).catch(err => console.log(err))
     },
     deleteBroadcast ({ commit }, id) {
@@ -33,7 +33,7 @@ export default {
   mutations: {
     getRecordings (state, res) {
       const recordings = res.recordings
-      state.broadcastList = recordings
+      state.broadcastList = recordings || []
     },
     getRecordingById (state, res) {
       const recording = res.recording
