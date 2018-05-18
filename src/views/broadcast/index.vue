@@ -30,7 +30,7 @@
             </audio>
         </el-col>
         <el-col :span="4">
-          <el-button type="text" icon="el-icon-delete" size="mini" @click="deleteBroadcastConfirm(broad.id)">删除语音</el-button>
+          <el-button type="text" icon="el-icon-delete" size="mini" @click="deleteBroadcastConfirm(broad.id,index)">删除语音</el-button>
         </el-col>
       </el-col>
     </el-card>
@@ -51,12 +51,14 @@ export default {
         per_page: 5
       },
       busy: true,
-      broadcast: []
+      broadcast: [],
+      indexForDelete: ''
     }
   },
   watch: {
     deleteRecordingResult () {
-      this.getRecordings()
+      this.broadcast.splice(this.indexForDelete, 1)
+      this.getRecordings(this.pagination)
     },
     broadcastList: {
       handler: function (newValue, oldValue) {
@@ -83,9 +85,9 @@ export default {
     ...mapMutations({
       logout: 'logout'
     }),
-    editBroadcast (Id) {
+    editBroadcast (id) {
       this.$router.push({
-        path: `/broadcast/edit/${Id}`
+        path: `/broadcast/edit/${id}`
       })
     },
     logoutConfirm () {
@@ -95,10 +97,11 @@ export default {
         this.logout()
       }).catch(err => console.log(err))
     },
-    deleteBroadcastConfirm (id) {
+    deleteBroadcastConfirm (id, index) {
       this.$confirm('确定删除该语音？', '提示', {
         type: 'warning'
       }).then(() => {
+        this.indexForDelete = index
         this.deleteBroadcast(id)
       }).catch(err => console.log(err))
     },
