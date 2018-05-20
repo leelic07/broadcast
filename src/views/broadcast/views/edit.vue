@@ -47,7 +47,13 @@ export default {
   data () {
     return {
       edit: 'BroadcastEdit',
-      isModification: false
+      isModification: false,
+      broadForEdit: {
+        id: 2,
+        content: 'yyyyyyyyyyy',
+        file: '',
+        timestamp: '2018-05-20'
+      }
     }
   },
   watch: {
@@ -63,7 +69,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      broadForEdit: 'broadForEdit',
+      // broadForEdit: 'broadForEdit',
       updateRecordingResult: 'updateRecordingResult'
     })
   },
@@ -86,7 +92,7 @@ export default {
     }
   },
   mounted () {
-    this.getRecordingById(this.$route.params.id)
+    // this.getRecordingById(this.$route.params.id)
   }
 }
 </script>

@@ -2,11 +2,19 @@
 .broadcast-container 
     >.el-col
         &:first-child
-            .el-button
+            >.el-button
                 float right
                 padding 0
                 margin-right 2%
                 margin-bottom 15px
+            .el-card
+                .el-checkbox
+                    float left
+                .el-button
+                    float left
+                    margin-top -5px
+                    &:nth-child(2)
+                        margin-left 2%
     .el-card
         width 80%
         margin-left 10%
@@ -15,8 +23,12 @@
             float left
             width 100%
             .el-col
+                .el-checkbox
+                    float left
+                    margin-top 6px
                 .el-tag
                     float left
+                    margin-left 15px
                     h4
                         text-align left
                 .el-button
