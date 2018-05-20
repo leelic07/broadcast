@@ -7,7 +7,7 @@
       </el-button>
       <el-card>
         <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-        <el-button type="primary" size="small" :disabled="checkedRecording.length < 2" @click="mergeRecordingConfirm">合并记录</el-button>
+        <el-button type="primary" size="small" icon="el-icon-menu" :disabled="checkedRecording.length < 2" @click="mergeRecordingConfirm">合并记录</el-button>
       </el-card>
     </el-col>
     <el-checkbox-group v-model="checkedRecording" @change="handleCheckedRecordingChange">
@@ -17,7 +17,7 @@
             <el-checkbox :label="broad.id" :key="broad.timestamp">选择</el-checkbox>
             <el-tag>
               <h3>
-                <i class="el-icon-service"></i>
+                <i class="el-icon-time"></i>
                 {{broad.timestamp | Date}}
               </h3>
             </el-tag>
@@ -59,18 +59,100 @@ export default {
       busy: true,
       broadcast: [{
         id: 1,
-        content: 'xxxxxxxxxx',
+        content: `假如我是一朵雪花，
+    翩翩的在半空里潇洒，
+    　我一定认清我的方向——
+    　飞扬，飞扬，飞扬，——
+    这地面上有我的方向。
+    不去那冷寞的幽谷，
+
+    不去那凄清的山麓，
+    　也不上荒街去惆怅——
+    　飞扬，飞扬，飞扬，——
+    你看，我有我的方向！
+
+    在半空里娟娟的飞舞，
+    认明了那清幽的住处，
+    　等着她来花园里探望——
+    　飞扬，飞扬，飞扬，——
+    啊，她身上有朱砂梅的清香！
+
+    　那时我凭借我的身轻，
+    盈盈的②，沾住了她的衣襟，
+    　贴近她柔波似的心胸——
+    　消溶，消溶，消溶——
+    溶入了她柔波似的心胸！    `,
         file: '',
         timestamp: '2018-05-20'
       }, {
         id: 2,
-        content: 'yyyyyyyyyyy',
+        content: `轻轻的我走了，
+    　正如我轻轻的来；
+    我轻轻的招手，
+    　作别西天的云彩。
+
+    那河畔的金柳
+    　是夕阳中的新娘
+    波光里的艳影，
+    　在我的心头荡漾。
+
+    软泥上的青荇，
+    　油油的在水底招摇；
+    在康河的柔波里，
+    　我甘心做一条水草
+
+    那树荫下的一潭，
+    　不是清泉，是天上虹
+    揉碎在浮藻间，
+    　沉淀着彩虹似的梦。
+
+    寻梦？撑一支长篙，
+    　向青草更青处漫溯，
+    满载一船星辉，
+    　在星辉斑斓里放歌
+
+    但我不能放歌，
+    　悄悄是别离的笙箫；
+    夏虫也为我沉默，
+    　沉默是今晚的康桥！
+
+    悄悄的我走了，
+    　正如我悄悄的来；
+    我挥一挥衣袖，
+    　不带走一片云彩。`,
+        file: '',
+        timestamp: '2018-05-20'
+      }, {
+        id: 3,
+        content: `假如我是一朵雪花，
+    翩翩的在半空里潇洒，
+    　我一定认清我的方向——
+    　飞扬，飞扬，飞扬，——
+    这地面上有我的方向。
+    不去那冷寞的幽谷，
+
+    不去那凄清的山麓，
+    　也不上荒街去惆怅——
+    　飞扬，飞扬，飞扬，——
+    你看，我有我的方向！
+
+    在半空里娟娟的飞舞，
+    认明了那清幽的住处，
+    　等着她来花园里探望——
+    　飞扬，飞扬，飞扬，——
+    啊，她身上有朱砂梅的清香！
+
+    　那时我凭借我的身轻，
+    盈盈的②，沾住了她的衣襟，
+    　贴近她柔波似的心胸——
+    　消溶，消溶，消溶——
+    溶入了她柔波似的心胸！    `,
         file: '',
         timestamp: '2018-05-20'
       }],
       isIndeterminate: true,
       checkAll: false,
-      recordingIds: [1, 2],
+      recordingIds: [1, 2, 3],
       checkedRecording: []
     }
   },
@@ -144,9 +226,10 @@ export default {
       this.$confirm('确定合并选中的记录？', '提示', {
         type: 'warning'
       }).then(() => {
-        const checkedBroadcast = this.broadcast.filter(broad => {
+        const checkedBroadcast = []
+        this.broadcast.forEach(broad => {
           this.checkedRecording.forEach(id => {
-            if (id === broad.id) return true
+            if (id === broad.id) checkedBroadcast.push(broad)
           })
         })
         if (checkedBroadcast.length) {

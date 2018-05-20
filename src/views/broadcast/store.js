@@ -12,7 +12,9 @@ export default {
     broadcastList: [],
     broadForEdit: {},
     updateRecordingResult: {},
-    deleteRecordingResult: {}
+    deleteRecordingResult: {},
+    checkedRecording: {},
+    contents: ''
   },
   actions: {
     getRecordings ({ commit }, pagination) {
@@ -75,12 +77,23 @@ export default {
         showClose: true
       })
       state.deleteRecordingResult = res
+    },
+    mergeRecording (state, res) {
+      let contents = ''
+      res.forEach(record => {
+        contents += `${record.content}\n`
+      })
+      state.contents = contents
+      state.checkedRecording = res
+      router.push({ path: '/broadcast/merge' })
     }
   },
   getters: {
     broadcastList: state => state.broadcastList,
     broadForEdit: state => state.broadForEdit,
     updateRecordingResult: state => state.updateRecordingResult,
-    deleteRecordingResult: state => state.deleteRecordingResult
+    deleteRecordingResult: state => state.deleteRecordingResult,
+    checkedRecording: state => state.checkedRecording,
+    contents: state => state.contents
   }
 }

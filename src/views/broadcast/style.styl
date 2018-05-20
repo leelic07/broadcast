@@ -1,3 +1,10 @@
+.broadcast-content
+    font-size 15px
+    word-break keep-all
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+
 /*语音播报列表*/
 .broadcast-container 
     >.el-col
@@ -38,11 +45,7 @@
             width 100%
             .el-col
                 &:first-child
-                    .broadcast-content
-                        word-break keep-all
-                        white-space nowrap
-                        overflow hidden
-                        text-overflow ellipsis
+                    
                 &:nth-child(2)
                     margin-top 20px
                     .el-button
@@ -104,3 +107,29 @@
                             audio
                                 width 100%
                         
+/*合并记录页面*/
+.merge-container
+    .el-card
+        // width 60%
+        // margin-left 20%
+        margin-bottom 20px
+        .el-col
+            &:first-child
+                .el-button
+                    float left
+        .el-form
+            padding-left 15%
+            padding-right 15%
+            >.el-col
+                // &:first-child
+                //     margin-bottom 15px
+                .el-tag
+                    float left
+                    margin-bottom 15px
+            .el-form-item
+                .el-tag
+                    float left
+                    margin-right 2%
+                p
+                    width 100%
+                    line-height 32px
