@@ -1,12 +1,35 @@
+.broadcast-content
+    font-size 15px
+    word-break keep-all
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+
 /*语音播报列表*/
 .broadcast-container 
     >.el-col
         &:first-child
-            .el-button
+            >.el-button
                 float right
                 padding 0
                 margin-right 2%
                 margin-bottom 15px
+            .el-card
+                .el-checkbox
+                    float left
+                    margin-top 6px
+                .el-button
+                    float left
+                    &:nth-child(2)
+                        margin-left 2%
+                    &:nth-child(3)
+                        float right
+                        margin-right 5%
+                .el-select
+                    float right
+                    margin-right 1%
+                .el-date-editor
+                    float right
     .el-card
         width 80%
         margin-left 10%
@@ -15,8 +38,12 @@
             float left
             width 100%
             .el-col
+                .el-checkbox
+                    float left
+                    margin-top 6px
                 .el-tag
                     float left
+                    margin-left 15px
                     h4
                         text-align left
                 .el-button
@@ -25,12 +52,6 @@
             float left
             width 100%
             .el-col
-                &:first-child
-                    .broadcast-content
-                        word-break keep-all
-                        white-space nowrap
-                        overflow hidden
-                        text-overflow ellipsis
                 &:nth-child(2)
                     margin-top 20px
                     .el-button
@@ -53,11 +74,14 @@
         .el-card__body
             >.el-col
                 &:first-child
+                    margin-bottom 25px
                     .el-button
                         float left
                         i
                             font-size 16px
                             font-weight bold
+                    h2
+                        padding-right 7%
             .el-form
                 padding-left 15%
                 padding-top 15px
@@ -67,7 +91,7 @@
                         float left
                     h3
                         text-align left
-                        margin-top 65px
+                        margin-top 95px
                     p
                         margin-top 50px
                         text-align left
@@ -81,8 +105,14 @@
                             font-size 14px
                             margin-left 2%
                             margin-top 15px
-                        .el-col
-                            margin-top 20px
+                        >.el-col
+                            &:nth-child(2)
+                                margin-top 20px
+                            .el-col
+                                &:nth-child(2)
+                                    .el-button
+                                        float right
+                                        padding-top 7px
                             .el-button
                                 float left
                                 position relative
@@ -91,4 +121,45 @@
                                 margin-top 10px
                             audio
                                 width 100%
+    .el-dialog
+        width 40%
+        .el-dialog__header
+            .el-dialog__title
+                float left
+        .el-dialog__body
+            .el-form
+                margin-top 20px
+                padding-right 10%
+                .el-form-item__content
+                    .el-tag
+                        float left
+                    p
+                        margin-top 50px
+                        text-align left
+
                         
+/*合并记录页面*/
+.merge-container
+    .el-card
+        margin-bottom 20px
+        .el-col
+            &:first-child
+                margin-bottom 25px
+                .el-button
+                    float left
+                h2
+                    padding-right 7%
+        .el-form
+            padding-left 15%
+            padding-right 15%
+            >.el-col
+                .el-tag
+                    float left
+                    margin-bottom 15px
+            .el-form-item
+                .el-tag
+                    float left
+                    margin-right 2%
+                p
+                    width 100%
+                    line-height 32px

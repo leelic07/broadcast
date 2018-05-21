@@ -17,6 +17,7 @@ Vue.use(infiniteScroll)
 Vue.config.productionTip = false
 Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 Vue.prototype.$_baseURL = config.baseURL
+// Vue.prototype.$_baseURL = 'http://10.93.1.111:8080'
 
 /* eslint-disable no-new */
 new Vue({

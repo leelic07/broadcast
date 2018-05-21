@@ -2,7 +2,9 @@ import {
   getRecordings,
   getRecordingById,
   updateRecording,
-  deleteBroadcast
+  deleteBroadcast,
+  sendRecordingIds,
+  getRecordingDetail
 } from './service'
 import { Message } from 'element-ui'
 import router from '@/router'
@@ -12,7 +14,12 @@ export default {
     broadcastList: [],
     broadForEdit: {},
     updateRecordingResult: {},
-    deleteRecordingResult: {}
+    deleteRecordingResult: {},
+    checkedRecording: {},
+    contents: '',
+    mergeRecordingResult: {},
+    downloadUrl: '',
+    recordingDetail: {}
   },
   actions: {
     getRecordings ({ commit }, pagination) {
@@ -28,6 +35,12 @@ export default {
     },
     deleteBroadcast ({ commit }, id) {
       deleteBroadcast(id).then(res => commit('deleteBroadcast', res)).catch(err => console.log(err))
+    },
+    sendRecordingIds ({ commit }, ids) {
+      sendRecordingIds(ids).then(res => res.code === 200 && commit('sendRecordingIds', res)).catch(err => console.log(err))
+    },
+    getRecordingDetail ({ commit }, id) {
+      getRecordingDetail(id).then(res => res.code === 200 && commit('getRecordingDetail', res)).catch(err => console.log(err))
     }
   },
   mutations: {
@@ -54,14 +67,22 @@ export default {
       state.updateRecordingResult = res
     },
     logout (state) {
-      router.replace({
-        path: '/login'
-      })
-      Message({
-        type: 'success',
-        message: '退出登录成功',
-        showClose: true
-      })
+      sessionStorage.setItem('token', '')
+      if (sessionStorage['token']) {
+        Message.error({
+          message: '退出登录失败',
+          showClose: true
+        })
+      } else {
+        router.push({
+          path: '/login'
+        })
+        Message({
+          type: 'success',
+          message: '退出登录成功',
+          showClose: true
+        })
+      }
     },
     deleteBroadcast (state, res) {
       const code = res.code
@@ -75,12 +96,41 @@ export default {
         showClose: true
       })
       state.deleteRecordingResult = res
+    },
+    mergeRecording (state, res) {
+      state.checkedRecording = res
+      router.push({ path: '/broadcast/merge' })
+    },
+    sendRecordingIds (state, res) {
+      const downloadUrl = res.recording.download_url
+      const contents = res.recording.content
+      const code = res.code
+      state.contents = contents
+      state.downloadUrl = downloadUrl
+      state.mergeRecordingResult = res
+      code === 200 ? Message({
+        type: 'success',
+        message: '合并记录成功',
+        showClose: true
+      }) : Message.error({
+        message: '合并记录失败',
+        showClose: true
+      })
+    },
+    getRecordingDetail (state, res) {
+      const recording = res.recording
+      state.recordingDetail = recording
     }
   },
   getters: {
     broadcastList: state => state.broadcastList,
     broadForEdit: state => state.broadForEdit,
     updateRecordingResult: state => state.updateRecordingResult,
-    deleteRecordingResult: state => state.deleteRecordingResult
+    deleteRecordingResult: state => state.deleteRecordingResult,
+    checkedRecording: state => state.checkedRecording,
+    contents: state => state.contents,
+    mergeRecordingResult: state => state.mergeRecordingResult,
+    downloadUrl: state => state.downloadUrl,
+    recordingDetail: state => state.recordingDetail
   }
 }
