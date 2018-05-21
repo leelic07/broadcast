@@ -20,7 +20,7 @@
       <el-card class="box-card" v-for="(broad, index) in broadcast" :key="index">
         <el-col slot="header" class="clearfix">
           <el-col :span="20">
-            <el-checkbox :label="broad.id" :key="broad.timestamp">选择</el-checkbox>
+            <el-checkbox :label="broad.id" :key="broad.timestamp" v-if="!broad.merged">选择</el-checkbox>
             <el-tag>
               <h3>
                 <i class="el-icon-time"></i>
