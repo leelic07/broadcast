@@ -19,7 +19,34 @@ export default {
     contents: '',
     mergeRecordingResult: {},
     downloadUrl: '',
-    recordingDetail: {}
+    recordingDetail: {},
+    pickerOptions: {
+      shortcuts: [{
+        text: '最近一周',
+        onClick (picker) {
+          const end = new Date()
+          const start = new Date()
+          start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+          picker.$emit('pick', [start, end])
+        }
+      }, {
+        text: '最近一个月',
+        onClick (picker) {
+          const end = new Date()
+          const start = new Date()
+          start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+          picker.$emit('pick', [start, end])
+        }
+      }, {
+        text: '最近三个月',
+        onClick (picker) {
+          const end = new Date()
+          const start = new Date()
+          start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+          picker.$emit('pick', [start, end])
+        }
+      }]
+    }
   },
   actions: {
     getRecordings ({ commit }, pagination) {
@@ -131,6 +158,7 @@ export default {
     contents: state => state.contents,
     mergeRecordingResult: state => state.mergeRecordingResult,
     downloadUrl: state => state.downloadUrl,
-    recordingDetail: state => state.recordingDetail
+    recordingDetail: state => state.recordingDetail,
+    pickerOptions: state => state.pickerOptions
   }
 }

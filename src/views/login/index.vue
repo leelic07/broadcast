@@ -1,35 +1,52 @@
 <template>
-  <el-row class="top-content" @keyup.native.enter="submitForm('loginForm')">
+  <el-row class="top-content"
+    @keyup.native.enter="submitForm('loginForm')">
     <el-col class="inner-bg">
       <el-col class="container">
         <el-col class="row">
-          <el-col :span="6" class="set-host">
+          <el-col :span="6"
+            class="set-host">
             <label>
-              <el-input v-model="host" placeholder="请填写访问的主机名，端口" size="small">
+              <el-input v-model="host"
+                placeholder="请填写访问的主机名，端口"
+                size="small">
                 <template slot="prepend">
                   http://
                 </template>
-                <el-button slot="append" type="primary" @click="reload">刷新</el-button>
+                <el-button slot="append"
+                  type="primary"
+                  @click="reload">刷新</el-button>
               </el-input>
             </label>
           </el-col>
-          <el-col :span="12" :offset="6" class="form-box">
+          <el-col :span="12"
+            :offset="6"
+            class="form-box">
             <el-col class="form-top">
               <el-col class="form-top-left">
-                <h2>国科随意记</h2>
+                <h2>国科随身记</h2>
                 <p>请输入您的用户名和密码:</p>
               </el-col>
             </el-col>
             <el-col class="form-bottom">
-              <el-form :model="loginForm" label-position="left" :rules="rules" ref="loginForm" role="form">
+              <el-form :model="loginForm"
+                label-position="left"
+                :rules="rules"
+                ref="loginForm"
+                role="form">
                 <el-form-item prop="username">
-                  <el-input v-model="loginForm.username" type="text" placeholder="请输入用户名"></el-input>
+                  <el-input v-model="loginForm.username"
+                    type="text"
+                    placeholder="请输入用户名"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                  <el-input v-model="loginForm.password" type="password" placeholder="请输入用户密码"></el-input>
+                  <el-input v-model="loginForm.password"
+                    type="password"
+                    placeholder="请输入用户密码"></el-input>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="primary" @click="submitForm('loginForm')">登录</el-button>
+                  <el-button type="primary"
+                    @click="submitForm('loginForm')">登录</el-button>
                 </el-form-item>
               </el-form>
             </el-col>
@@ -112,6 +129,7 @@ white = #fff;
   .copy-right {
     position: fixed;
     bottom: 0;
+
     p {
       color: white;
       font-size: 14px;

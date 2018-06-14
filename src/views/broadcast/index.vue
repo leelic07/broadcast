@@ -1,26 +1,55 @@
 <template>
   <el-row class="broadcast-container">
     <el-col>
-      <el-button type="text" @click="logoutConfirm">
+      <el-button type="text"
+        @click="logoutConfirm">
         退出登录
         <i class="iconfont icon-tuichu"></i>
       </el-button>
       <el-card>
-        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-        <el-button type="primary" size="small" icon="el-icon-menu" :disabled="checkedRecordingIds.length < 2" @click="mergeRecordingConfirm">合并记录</el-button>
-        <el-button type="primary" icon="el-icon-search" size="small" @click="searchRecordings">搜索记录</el-button>
-        <el-date-picker size="small" v-model="datetime" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions" value-format="yyyy-MM-dd">
+        <el-checkbox :indeterminate="isIndeterminate"
+          v-model="checkAll"
+          @change="handleCheckAllChange">全选</el-checkbox>
+        <el-button type="primary"
+          size="small"
+          icon="el-icon-menu"
+          :disabled="checkedRecordingIds.length < 2"
+          @click="mergeRecordingConfirm">合并记录</el-button>
+        <el-button type="primary"
+          icon="el-icon-search"
+          size="small"
+          @click="searchRecordings">搜索记录</el-button>
+        <el-date-picker size="small"
+          v-model="datetime"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          :picker-options="pickerOptions"
+          value-format="yyyy-MM-dd">
         </el-date-picker>
-        <el-select v-model="merged" size="small">
-          <el-option v-for="(type,index) in mergedOptions" :key="index" :label="type.label" :value="type.value"></el-option>
+        <el-select v-model="merged"
+          size="small">
+          <el-option v-for="(type,index) in mergedOptions"
+            :key="index"
+            :label="type.label"
+            :value="type.value"></el-option>
         </el-select>
       </el-card>
     </el-col>
-    <el-checkbox-group v-model="checkedRecordingIds" @change="handleCheckedRecordingChange">
-      <el-card class="box-card" v-for="(broad, index) in broadcast" :key="index">
-        <el-col slot="header" class="clearfix">
+    <el-checkbox-group v-model="checkedRecordingIds"
+      @change="handleCheckedRecordingChange">
+      <el-card class="box-card"
+        v-for="(broad, index) in broadcast"
+        :key="index">
+        <el-col slot="header"
+          class="clearfix">
           <el-col :span="20">
-            <el-checkbox :label="broad.id" :key="broad.timestamp" v-if="!broad.merged">选择</el-checkbox>
+            <el-checkbox :label="broad.id"
+              :key="broad.timestamp"
+              v-if="!broad.merged">选择</el-checkbox>
             <el-tag>
               <h3>
                 <i class="el-icon-time"></i>
@@ -29,7 +58,11 @@
             </el-tag>
           </el-col>
           <el-col :span="4">
-            <el-button type="primary" plain size="small" icon="el-icon-edit" @click="editBroadcast(broad.id)">编辑语音</el-button>
+            <el-button type="primary"
+              plain
+              size="small"
+              icon="el-icon-edit"
+              @click="editBroadcast(broad.id)">编辑语音</el-button>
           </el-col>
         </el-col>
         <el-col>
@@ -37,17 +70,24 @@
             <p class="broadcast-content">{{broad.content || '暂无内容'}}</p>
           </el-col>
           <el-col :span="20">
-            <audio :src="$_baseURL + broad.filename" controls>
+            <audio :src="$_baseURL + broad.filename"
+              controls>
               您的浏览器不支持播放音频文件
             </audio>
           </el-col>
           <el-col :span="4">
-            <el-button type="text" icon="el-icon-delete" size="mini" @click="deleteBroadcastConfirm(broad.id,index)">删除语音</el-button>
+            <el-button type="text"
+              icon="el-icon-delete"
+              size="mini"
+              @click="deleteBroadcastConfirm(broad.id,index)">删除语音</el-button>
           </el-col>
         </el-col>
       </el-card>
     </el-checkbox-group>
-    <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="30" v-loading="loading"></div>
+    <div v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="busy"
+      infinite-scroll-distance="30"
+      v-loading="loading"></div>
   </el-row>
 </template>
 
@@ -80,34 +120,7 @@ export default {
       checkAll: false,
       allRecordingIds: [],
       checkedRecordingIds: [],
-      checkedBroadcast: [],
-      pickerOptions: {
-        shortcuts: [{
-          text: '最近一周',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近三个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
-          }
-        }]
-      }
+      checkedBroadcast: []
     }
   },
   watch: {
@@ -127,9 +140,6 @@ export default {
     },
     mergeRecordingResult () {
       this.mergeRecording(this.checkedBroadcast)
-    },
-    recordingType () {
-      console.log('type change')
     },
     datetime (newValue) {
       if (newValue) {
@@ -151,7 +161,8 @@ export default {
       broadcastList: 'broadcastList',
       deleteRecordingResult: 'deleteRecordingResult',
       loading: 'loading',
-      mergeRecordingResult: 'mergeRecordingResult'
+      mergeRecordingResult: 'mergeRecordingResult',
+      pickerOptions: 'pickerOptions'
     })
   },
   methods: {
