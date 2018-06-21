@@ -13,12 +13,11 @@
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "node build/build.js",
     "electron_dev": "npm run build && electron build/electron.js",
-    "electron_build": "electron-packager ./dist/ --platform=win32 --arch=x64 --icon=src/assets/favicon.ico --overwrite"
+    "electron_build": "electron-packager ./dist/ --platform=win32 --arch=ia32 --icon=src/assets/favicon.ico --overwrite"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.3.8",
-    "jquery": "^3.3.1",
     "vue": "^2.5.2",
     "vue-infinite-scroll": "^2.0.2",
     "vue-router": "^3.0.1",
